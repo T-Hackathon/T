@@ -1,5 +1,7 @@
 package org.academiadecodigo.hackathon.persistence;
 
+import org.academiadecodigo.hackathon.persistence.model.Model;
+
 import java.util.List;
 /**
  * Base interface for data access objects, provides methods to manage models

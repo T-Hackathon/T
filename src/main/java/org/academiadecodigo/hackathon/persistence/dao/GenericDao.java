@@ -1,6 +1,7 @@
 package org.academiadecodigo.hackathon.persistence.dao;
 
 import org.academiadecodigo.hackathon.persistence.Dao;
+import org.academiadecodigo.hackathon.persistence.model.Model;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

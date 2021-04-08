@@ -1,4 +1,6 @@
 package org.academiadecodigo.hackathon.persistence;
 
-public interface VideoDao implements Dao                                                                     {
+import org.academiadecodigo.hackathon.persistence.model.Video;
+
+public interface VideoDao extends Dao<Video> {
 }

@@ -1,4 +1,6 @@
 package org.academiadecodigo.hackathon.persistence;
 
-public interface ChallengeDao implements Dao<Challenge>{
+import org.academiadecodigo.hackathon.persistence.model.Challenge;
+
+public interface ChallengeDao extends Dao<Challenge> {
 }

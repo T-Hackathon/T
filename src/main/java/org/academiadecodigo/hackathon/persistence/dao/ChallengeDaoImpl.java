@@ -1,6 +1,7 @@
 package org.academiadecodigo.hackathon.persistence.dao;
 
 import org.academiadecodigo.hackathon.persistence.ChallengeDao;
+import org.academiadecodigo.hackathon.persistence.model.Challenge;
 import org.springframework.stereotype.Repository;
 
 @Repository

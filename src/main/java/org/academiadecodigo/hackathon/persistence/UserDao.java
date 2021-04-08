@@ -1,4 +1,6 @@
 package org.academiadecodigo.hackathon.persistence;
 
-public interface UserDao implements Dao<User>{
+import org.academiadecodigo.hackathon.persistence.model.User;
+
+public interface UserDao extends Dao<User> {
 }
