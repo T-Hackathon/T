@@ -15,13 +15,13 @@ public class ChallengeDtoToChallenge {
     private ChallengeService challengeService;
 
     @Autowired
-    public void setChallengeService(challengeService challengeService) {
+    public void setChallengeService(ChallengeService challengeService) {
         this.challengeService = challengeService;
     }
 
     public Challenge convert(ChallengeDto challengeDto) {
 
-        Challenge challenge = (challengeDto.getId() != null ? challengeService.get(challengeDto.getId()) : new User());
+        Challenge challenge = (challengeDto.getId() != null ? challengeService.get(challengeDto.getId()) : new Challenge());
 
         challenge.setName(challengeDto.getName());
         challenge.setLocation(challengeDto.getLocation());

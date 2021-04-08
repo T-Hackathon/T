@@ -4,6 +4,7 @@ import org.academiadecodigo.hackathon.converters.UserDtoToUser;
 import org.academiadecodigo.hackathon.converters.UserToUserDto;
 import org.academiadecodigo.hackathon.dto.UserDto;
 import org.academiadecodigo.hackathon.persistence.model.User;
+import org.academiadecodigo.hackathon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,61 +24,61 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/user")
 public class RestUserController {
 
-    private UserService UserService;
-    private UserDtoToUser UserDtoToUser;
-    private UserToUserDto UserToUserDto;
+    private UserService userService;
+    private UserDtoToUser userDtoToUser;
+    private UserToUserDto userToUserDto;
 
 
     @Autowired
-    public void setUserService(UserService UserService) {
-        this.UserService = UserService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 
     @Autowired
-    public void setUserDtoToUser(UserDtoToUser UserDtoToUser) {
-        this.UserDtoToUser = UserDtoToUser;
+    public void setUserDtoToUser(UserDtoToUser userDtoToUser) {
+        this.userDtoToUser = userDtoToUser;
     }
 
 
     @Autowired
-    public void setUserToUserDto(org.academiadecodigo.hackathon.converters.UserToUserDto UserToUserDto) {
-        this.UserToUserDto = UserToUserDto;
+    public void setUserToUserDto(UserToUserDto userToUserDto) {
+        this.userToUserDto = userToUserDto;
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = {"/", ""})
     public ResponseEntity<List<UserDto>> listUsers() {
 
-        List<UserDto> UserDtos = UserService.list().stream()
-                .map(user -> UserToUserDto.convert(user))
+        List<UserDto> userDtos = userService.list().stream()
+                .map(user -> userToUserDto.convert(user))
                 .collect(Collectors.toList());
 
-        return new ResponseEntity<>(UserDtos, HttpStatus.OK);
+        return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity<UserDto> showUser(@PathVariable Integer id) {
 
-        User User = UserService.get(id);
+        User User = userService.get(id);
 
         if (User == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(UserToUserDto.convert(User), HttpStatus.OK);
+        return new ResponseEntity<>(userToUserDto.convert(User), HttpStatus.OK);
     }
 
 
     @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
-    public ResponseEntity<?> addUser(@Valid @RequestBody UserDto UserDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> addUser(@Valid @RequestBody UserDto userDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
-        if (bindingResult.hasErrors() || UserDto.getId() != null) {
+        if (bindingResult.hasErrors() || userDto.getId() != null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        User savedUser = UserService.save(UserDtoToUser.convert(UserDto));
+        User savedUser = userService.save(userDtoToUser.convert(userDto));
 
         // get help from the framework building the path for the newly created resource
         UriComponents uriComponents = uriComponentsBuilder.path("/api/User/" + savedUser.getId()).build();
@@ -102,31 +102,31 @@ public class RestUserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (UserService.get(id) == null) {
+        if (userService.get(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         UserDto.setId(id);
 
-        UserService.save(UserDtoToUser.convert(UserDto));
+        userService.save(userDtoToUser.convert(UserDto));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    public ResponseEntity<UserDto> deleteUser(@PathVariable Integer id) {
-
-        try {
-
-            UserService.delete(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-        } catch (AssociationExistsException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-        } catch (UserNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+//    public ResponseEntity<UserDto> deleteUser(@PathVariable Integer id) {
+//
+//        try {
+//
+//            UserService.delete(id);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//
+//        } catch (AssociationExistsException e) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//
+//        } catch (UserNotFoundException e) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 }
 
