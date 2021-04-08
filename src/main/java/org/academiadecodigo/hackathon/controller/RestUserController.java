@@ -1,12 +1,9 @@
-package org.academiadecodigo.javabank.controller.rest;
+package org.academiadecodigo.hackathon.controller;
 
-import org.academiadecodigo.javabank.command.UserDto;
-import org.academiadecodigo.javabank.converters.UserDtoToUser;
-import org.academiadecodigo.javabank.converters.UserToUserDto;
-import org.academiadecodigo.javabank.exceptions.AssociationExistsException;
-import org.academiadecodigo.javabank.exceptions.UserNotFoundException;
-import org.academiadecodigo.javabank.persistence.model.User;
-import org.academiadecodigo.javabank.services.UserService;
+import org.academiadecodigo.hackathon.converters.UserDtoToUser;
+import org.academiadecodigo.hackathon.converters.UserToUserDto;
+import org.academiadecodigo.hackathon.dto.UserDto;
+import org.academiadecodigo.hackathon.persistence.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -45,7 +42,7 @@ public class RestUserController {
 
 
     @Autowired
-    public void setUserToUserDto(UserToUserDto UserToUserDto) {
+    public void setUserToUserDto(org.academiadecodigo.hackathon.converters.UserToUserDto UserToUserDto) {
         this.UserToUserDto = UserToUserDto;
     }
 
@@ -54,7 +51,7 @@ public class RestUserController {
     public ResponseEntity<List<UserDto>> listUsers() {
 
         List<UserDto> UserDtos = UserService.list().stream()
-                .map(User -> UserToUserDto.convert(User))
+                .map(user -> UserToUserDto.convert(user))
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(UserDtos, HttpStatus.OK);

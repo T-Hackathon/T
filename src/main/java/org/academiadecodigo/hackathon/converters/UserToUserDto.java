@@ -1,22 +1,20 @@
 package org.academiadecodigo.hackathon.converters;
 
-import org.academiadecodigo.javabank.command.UserDto;
-import org.academiadecodigo.javabank.persistence.model.User;
-import org.springframework.core.convert.converter.Converter;
+import org.academiadecodigo.hackathon.dto.UserDto;
+import org.academiadecodigo.hackathon.persistence.model.User;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class UserToUserDto extends AbstractConverter<User, UserDto> {
+public class UserToUserDto {
 
 
-    @Override
     public UserDto convert(User User) {
 
         UserDto UserDto = new UserDto();
         UserDto.setId(User.getId());
-        UserDto.setFirstName(User.getFirstName());
-        UserDto.setLastName(User.getLastName());
+        UserDto.setUserName(User.getUserName());
+        UserDto.setAge(User.getAge());
         UserDto.setEmail(User.getEmail());
         UserDto.setPhone(User.getPhone());
 
