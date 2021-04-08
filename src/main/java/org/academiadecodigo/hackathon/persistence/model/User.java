@@ -1,5 +1,7 @@
 package org.academiadecodigo.hackathon.persistence.model;
 
+import util.Security;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

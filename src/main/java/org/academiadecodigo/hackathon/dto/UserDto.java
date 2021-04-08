@@ -1,6 +1,7 @@
 package org.academiadecodigo.hackathon.dto;
 
 import org.academiadecodigo.hackathon.persistence.model.Video;
+import util.Security;
 
 import javax.validation.constraints.*;
 import java.util.List;
@@ -31,6 +32,11 @@ public class UserDto {
     @NotBlank(message = "City is mandatory")
     @Size(min = 3, max = 64)
     private String city;
+
+    @NotNull(message = "Password is mandatory")
+    @NotBlank(message = "Password is mandatory")
+    @Size(min = 3, max = 64)
+    private String password;
 
     private List<Video> videos;
 
@@ -91,6 +97,13 @@ public class UserDto {
         this.videos = videos;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = Security.getHash(password);
+    }
 
     @Override
     public String toString() {

@@ -3,7 +3,6 @@ package org.academiadecodigo.hackathon.converters;
 import org.academiadecodigo.hackathon.dto.UserDto;
 import org.academiadecodigo.hackathon.persistence.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.academiadecodigo.hackathon.service.UserService;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +24,7 @@ public class UserDtoToUser {
         User.setAge(UserDto.getAge());
         User.setEmail(UserDto.getEmail());
         User.setPhone(UserDto.getPhone());
+        User.setPassword(UserDto.getPassword());
 
         return User;
     }

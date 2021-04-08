@@ -17,6 +17,7 @@ public class UserToUserDto {
         UserDto.setAge(User.getAge());
         UserDto.setEmail(User.getEmail());
         UserDto.setPhone(User.getPhone());
+        UserDto.setPassword(User.getPassword());
 
         return UserDto;
     }
