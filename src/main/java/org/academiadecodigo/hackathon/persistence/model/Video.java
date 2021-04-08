@@ -9,7 +9,7 @@ public class Video extends AbstractModel{
     private String src;
 
     @ManyToOne
-    private User User;
+    private User user;
 
     @ManyToOne
     private Location location;
@@ -27,11 +27,11 @@ public class Video extends AbstractModel{
     }
 
     public org.academiadecodigo.hackathon.persistence.model.User getUser() {
-        return User;
+        return user;
     }
 
     public void setUser(org.academiadecodigo.hackathon.persistence.model.User user) {
-        User = user;
+        this.user = user;
     }
 
     public Location getLocation() {

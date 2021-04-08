@@ -15,10 +15,7 @@ public class UserDto {
     @Size(min = 3, max = 64)
     private String userName;
 
-    @NotNull(message = " Age is mandatory")
-    @NotBlank(message = "Age name is mandatory")
-    @Size(min = 1, max = 3)
-    private Integer Age;
+    private Integer age;
 
     @Email
     @NotBlank(message = "Email is mandatory")
@@ -58,11 +55,11 @@ public class UserDto {
     }
 
     public Integer getAge() {
-        return Age;
+        return age;
     }
 
     public void setAge(Integer age) {
-        Age = age;
+        this.age = age;
     }
 
     public String getEmail() {
@@ -110,7 +107,7 @@ public class UserDto {
         return "UserDto{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
-                ", Age='" + Age + '\'' +
+                ", Age='" + age + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", city='" + city + '\'' +
