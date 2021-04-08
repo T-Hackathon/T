@@ -11,7 +11,7 @@ public class Video extends AbstractModel{
     @ManyToOne
     private User user;
 
-    @ManyToOne
+    @OneToOne
     private Location location;
 
     @ManyToOne

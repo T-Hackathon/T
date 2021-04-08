@@ -9,24 +9,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDtoToUser {
 
-    private UserService UserService;
+    private UserService userService;
 
     @Autowired
-    public void setUserService(UserService UserService) {
-        this.UserService = UserService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
-    public User convert(UserDto UserDto) {
+    public User convert(UserDto userDto) {
 
-        User User = (UserDto.getId() != null ? UserService.get(UserDto.getId()) : new User());
+        User user = (userDto.getId() != null ? userService.get(userDto.getId()) : new User());
 
-        User.setUserName(UserDto.getUserName());
-        User.setAge(UserDto.getAge());
-        User.setEmail(UserDto.getEmail());
-        User.setPhone(UserDto.getPhone());
-        User.setPassword(UserDto.getPassword());
+        user.setUserName(userDto.getUserName());
+        user.setAge(userDto.getAge());
+        user.setEmail(userDto.getEmail());
+        user.setPhone(userDto.getPhone());
+        user.setPassword(userDto.getPassword());
+        user.setCity(userDto.getCity());
 
-        return User;
+        return user;
     }
 }
 

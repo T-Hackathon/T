@@ -18,7 +18,7 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 
         <property name="driverClass" value="${driver}"/>
-        <property name="jdbcUrl" value="jdbc:${sql}://${prod.jdbc.host}/${prod.jdbc.database}?useSSL=false?createDatabaseIfNotExist=true"/>
+        <property name="jdbcUrl" value="jdbc:${sql}://${prod.jdbc.host}/${prod.jdbc.database}?useSSL=false"/>
         <property name="user" value="${prod.jdbc.username}"/>
         <property name="password" value="${prod.jdbc.password}"/>
 
