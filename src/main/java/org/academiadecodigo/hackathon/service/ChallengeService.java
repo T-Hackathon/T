@@ -2,7 +2,6 @@ package org.academiadecodigo.hackathon.service;
 
 
 import org.academiadecodigo.hackathon.persistence.model.Challenge;
-import org.academiadecodigo.hackathon.persistence.model.User;
 
 import java.util.List;
 
