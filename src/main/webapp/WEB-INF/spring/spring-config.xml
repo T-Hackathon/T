@@ -21,5 +21,6 @@
     <context:component-scan base-package="org.academiadecodigo.hackathon"/>
 
     <import resource="persistence.xml"/>
+    <import resource="persistence-postgres.xml"/>
 
 </beans>
