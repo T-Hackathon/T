@@ -26,7 +26,7 @@ public abstract class AbstractModel implements Model{
     //Getters and Setters
     @Override
     public Integer getId() {
-        return null;
+        return id;
     }
 
     @Override

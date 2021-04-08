@@ -1,10 +1,13 @@
 package org.academiadecodigo.hackathon.controller;
 
-import org.academiadecodigo.hackathon.converters.UserDtoToUser;
-import org.academiadecodigo.hackathon.converters.UserToUserDto;
+import org.academiadecodigo.hackathon.converters.*;
+import org.academiadecodigo.hackathon.dto.ChallengeDto;
 import org.academiadecodigo.hackathon.dto.UserDto;
+import org.academiadecodigo.hackathon.dto.VideoDto;
 import org.academiadecodigo.hackathon.persistence.model.User;
+import org.academiadecodigo.hackathon.persistence.model.Video;
 import org.academiadecodigo.hackathon.service.UserService;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,7 +30,30 @@ public class RestUserController {
     private UserService userService;
     private UserDtoToUser userDtoToUser;
     private UserToUserDto userToUserDto;
+    private ChallengeDtoToChallenge challengeDtoToChallenge;
+    private ChallengeToChallengeDto challengeToChallengeDto;
+    private VideoDtoToVideo videoDtoToVideo;
+    private VideoToVideoDto videoToVideoDto;
 
+    @Autowired
+    public void setChallengeDtoToChallenge(ChallengeDtoToChallenge challengeDtoToChallenge) {
+        this.challengeDtoToChallenge = challengeDtoToChallenge;
+    }
+
+    @Autowired
+    public void setChallengeToChallengeDto(ChallengeToChallengeDto challengeToChallengeDto) {
+        this.challengeToChallengeDto = challengeToChallengeDto;
+    }
+
+    @Autowired
+    public void setVideoDtoToVideo(VideoDtoToVideo videoDtoToVideo) {
+        this.videoDtoToVideo = videoDtoToVideo;
+    }
+
+    @Autowired
+    public void setVideoToVideoDto(VideoToVideoDto videoToVideoDto) {
+        this.videoToVideoDto = videoToVideoDto;
+    }
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -109,6 +135,24 @@ public class RestUserController {
         UserDto.setId(id);
 
         userService.save(userDtoToUser.convert(UserDto));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}/video")
+    public ResponseEntity<List<Video>> videosFromUser(@PathVariable Integer id){
+        User user = userService.get(id);
+        List<VideoDto> toReturn = user.getVideos().stream()
+                    .map(video -> videoToVideoDto.convert(video))
+                    .collect(Collectors.toList());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/{id}/video")
+    public ResponseEntity<?> saveVideo(@RequestBody VideoDto videoDto, @PathVariable Integer id){
+        User user = userService.get(id);
+        user.getVideos().add(videoDtoToVideo.convert(videoDto));
+        userService.save(user);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

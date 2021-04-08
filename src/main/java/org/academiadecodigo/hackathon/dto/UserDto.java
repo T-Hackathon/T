@@ -1,5 +1,6 @@
 package org.academiadecodigo.hackathon.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.academiadecodigo.hackathon.persistence.model.Video;
 import util.Security;
 
@@ -33,6 +34,7 @@ public class UserDto {
     @NotNull(message = "Password is mandatory")
     @NotBlank(message = "Password is mandatory")
     @Size(min = 3, max = 64)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     private List<Video> videos;
