@@ -139,7 +139,7 @@ public class RestUserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}/video")
-    public ResponseEntity<List<Video>> videosFromUser(@PathVariable Integer id){
+    public ResponseEntity<List<Video    >> videosFromUser(@PathVariable Integer id){
         User user = userService.get(id);
         List<VideoDto> toReturn = user.getVideos().stream()
                     .map(video -> videoToVideoDto.convert(video))

@@ -1,9 +1,6 @@
 package org.academiadecodigo.hackathon.persistence.model;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -15,7 +12,20 @@ public class Challenge extends AbstractModel{
     @OneToOne
     private Location location;
 
-    @OneToMany
+    @OneToMany(
+            // propagate changes on customer entity to account entities
+            cascade = {CascadeType.ALL},
+
+            // make sure to remove recipients if unlinked from customer
+            orphanRemoval = true,
+
+            // use recipient foreign key on recipient table to establish
+            // the many-to-one relationship instead of a join table
+            mappedBy = "challenge",
+
+            // fetch accounts from database together with user
+            fetch = FetchType.EAGER
+    )
     private List<Video> videos;
 
     private Boolean Status;
