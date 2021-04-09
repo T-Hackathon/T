@@ -23,7 +23,7 @@ public class ChallengeDtoToChallenge {
 
         Challenge challenge = (challengeDto.getId() != null ? challengeService.get(challengeDto.getId()) : new Challenge());
 
-        challenge.setName(challengeDto.getName());
+        challenge.setNameChallenge(challengeDto.getName());
         challenge.setLocation(challengeDto.getLocation());
         challenge.setVideos(challengeDto.getVideos());
         challenge.setStatus(challengeDto.isStatus());

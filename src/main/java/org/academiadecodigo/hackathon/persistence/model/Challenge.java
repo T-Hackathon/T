@@ -7,7 +7,7 @@ import java.util.List;
 @Table(name = "challenge")
 public class Challenge extends AbstractModel{
     //Fields
-    private String name;
+    private String nameChallenge;
 
     @OneToOne
     private Location location;
@@ -31,12 +31,12 @@ public class Challenge extends AbstractModel{
     private Boolean Status;
 
     //Getters and Setters
-    public String getName() {
-        return name;
+    public String getNameChallenge() {
+        return nameChallenge;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameChallenge(String nameChallenge) {
+        this.nameChallenge = nameChallenge;
     }
 
     public Location getLocation() {

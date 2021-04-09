@@ -1,23 +1,28 @@
 package org.academiadecodigo.hackathon.persistence.model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "location")
 public class Location extends AbstractModel{
     //Fields
-    private String name;
+    private String nameLoc;
     private String longitude;
     private String latitude;
 
+    @OneToOne
+    private Challenge challenge;
+
     //Getters and Setters
-    public String getName() {
-        return name;
+    public String getNameLoc() {
+        return nameLoc;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameLoc(String nameLoc) {
+        this.nameLoc = nameLoc;
     }
 
     public String getLongitude() {

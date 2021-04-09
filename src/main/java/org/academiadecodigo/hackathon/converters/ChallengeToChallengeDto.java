@@ -11,7 +11,7 @@ public class ChallengeToChallengeDto {
 
         ChallengeDto challengeDto = new ChallengeDto();
         challengeDto.setId(challenge.getId());
-        challengeDto.setName(challenge.getName());
+        challengeDto.setName(challenge.getNameChallenge());
         challengeDto.setStatus(challenge.getStatus());
         challengeDto.setVideos(challenge.getVideos());
         challengeDto.setLocation(challenge.getLocation());
