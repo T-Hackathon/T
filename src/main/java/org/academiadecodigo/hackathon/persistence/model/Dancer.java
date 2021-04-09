@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends AbstractModel{
+public class Dancer extends AbstractModel{
     //Fields
     private String userName;
     private String password;

@@ -14,7 +14,7 @@
     <!-- Use spring servlet for all requests, including static resources -->
     <mvc:default-servlet-handler/>
 
-    <!-- User @Controller, @Service annotations -->
+    <!-- Dancer @Controller, @Service annotations -->
     <mvc:annotation-driven/>
 
     <!-- Base package to search for spring beans -->

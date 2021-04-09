@@ -1,7 +1,6 @@
 package org.academiadecodigo.hackathon.service;
 
 import org.academiadecodigo.hackathon.persistence.VideoDao;
-import org.academiadecodigo.hackathon.persistence.model.User;
 import org.academiadecodigo.hackathon.persistence.model.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

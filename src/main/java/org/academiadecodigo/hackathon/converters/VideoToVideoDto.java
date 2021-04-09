@@ -1,8 +1,6 @@
 package org.academiadecodigo.hackathon.converters;
 
-import org.academiadecodigo.hackathon.dto.UserDto;
 import org.academiadecodigo.hackathon.dto.VideoDto;
-import org.academiadecodigo.hackathon.persistence.model.User;
 import org.academiadecodigo.hackathon.persistence.model.Video;
 import org.springframework.stereotype.Component;
 

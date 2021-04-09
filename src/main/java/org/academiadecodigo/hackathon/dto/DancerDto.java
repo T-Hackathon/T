@@ -7,7 +7,7 @@ import util.Security;
 import javax.validation.constraints.*;
 import java.util.List;
 
-public class UserDto {
+public class DancerDto {
 
     private Integer id;
 

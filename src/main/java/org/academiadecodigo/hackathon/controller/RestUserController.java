@@ -1,13 +1,11 @@
 package org.academiadecodigo.hackathon.controller;
 
 import org.academiadecodigo.hackathon.converters.*;
-import org.academiadecodigo.hackathon.dto.ChallengeDto;
-import org.academiadecodigo.hackathon.dto.UserDto;
+import org.academiadecodigo.hackathon.dto.DancerDto;
 import org.academiadecodigo.hackathon.dto.VideoDto;
-import org.academiadecodigo.hackathon.persistence.model.User;
+import org.academiadecodigo.hackathon.persistence.model.Dancer;
 import org.academiadecodigo.hackathon.persistence.model.Video;
-import org.academiadecodigo.hackathon.service.UserService;
-import org.hibernate.annotations.Parameter;
+import org.academiadecodigo.hackathon.service.DancerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,9 +25,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/user")
 public class RestUserController {
 
-    private UserService userService;
-    private UserDtoToUser userDtoToUser;
-    private UserToUserDto userToUserDto;
+    private DancerService dancerService;
+    private DancerDtoToUser dancerDtoToUser;
+    private DancerToUserDto dancerToUserDto;
     private ChallengeDtoToChallenge challengeDtoToChallenge;
     private ChallengeToChallengeDto challengeToChallengeDto;
     private VideoDtoToVideo videoDtoToVideo;
@@ -56,58 +54,58 @@ public class RestUserController {
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserService(DancerService dancerService) {
+        this.dancerService = dancerService;
     }
 
 
     @Autowired
-    public void setUserDtoToUser(UserDtoToUser userDtoToUser) {
-        this.userDtoToUser = userDtoToUser;
+    public void setUserDtoToUser(DancerDtoToUser dancerDtoToUser) {
+        this.dancerDtoToUser = dancerDtoToUser;
     }
 
 
     @Autowired
-    public void setUserToUserDto(UserToUserDto userToUserDto) {
-        this.userToUserDto = userToUserDto;
+    public void setUserToUserDto(DancerToUserDto dancerToUserDto) {
+        this.dancerToUserDto = dancerToUserDto;
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = {"/", ""})
-    public ResponseEntity<List<UserDto>> listUsers() {
+    public ResponseEntity<List<DancerDto>> listUsers() {
 
-        List<UserDto> userDtos = userService.list().stream()
-                .map(user -> userToUserDto.convert(user))
+        List<DancerDto> dancerDtos = dancerService.list().stream()
+                .map(user -> dancerToUserDto.convert(user))
                 .collect(Collectors.toList());
 
-        return new ResponseEntity<>(userDtos, HttpStatus.OK);
+        return new ResponseEntity<>(dancerDtos, HttpStatus.OK);
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ResponseEntity<UserDto> showUser(@PathVariable Integer id) {
+    public ResponseEntity<DancerDto> showUser(@PathVariable Integer id) {
 
-        User User = userService.get(id);
+        Dancer Dancer = dancerService.get(id);
 
-        if (User == null) {
+        if (Dancer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(userToUserDto.convert(User), HttpStatus.OK);
+        return new ResponseEntity<>(dancerToUserDto.convert(Dancer), HttpStatus.OK);
     }
 
 
     @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
-    public ResponseEntity<?> addUser(@Valid @RequestBody UserDto userDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> addUser(@Valid @RequestBody DancerDto dancerDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
-        if (bindingResult.hasErrors() || userDto.getId() != null) {
+        if (bindingResult.hasErrors() || dancerDto.getId() != null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        User savedUser = userService.save(userDtoToUser.convert(userDto));
+        Dancer savedDancer = dancerService.save(dancerDtoToUser.convert(dancerDto));
 
         // get help from the framework building the path for the newly created resource
-        UriComponents uriComponents = uriComponentsBuilder.path("/api/User/" + savedUser.getId()).build();
+        UriComponents uriComponents = uriComponentsBuilder.path("/api/User/" + savedDancer.getId()).build();
 
         // set headers with the created path
         HttpHeaders headers = new HttpHeaders();
@@ -118,30 +116,30 @@ public class RestUserController {
 
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public ResponseEntity<UserDto> editUser(@Valid @RequestBody UserDto UserDto, BindingResult bindingResult, @PathVariable Integer id) {
+    public ResponseEntity<DancerDto> editUser(@Valid @RequestBody DancerDto DancerDto, BindingResult bindingResult, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (UserDto.getId() != null && !UserDto.getId().equals(id)) {
+        if (DancerDto.getId() != null && !DancerDto.getId().equals(id)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (userService.get(id) == null) {
+        if (dancerService.get(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        UserDto.setId(id);
+        DancerDto.setId(id);
 
-        userService.save(userDtoToUser.convert(UserDto));
+        dancerService.save(dancerDtoToUser.convert(DancerDto));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}/video")
     public ResponseEntity<List<Video    >> videosFromUser(@PathVariable Integer id){
-        User user = userService.get(id);
-        List<VideoDto> toReturn = user.getVideos().stream()
+        Dancer dancer = dancerService.get(id);
+        List<VideoDto> toReturn = dancer.getVideos().stream()
                     .map(video -> videoToVideoDto.convert(video))
                     .collect(Collectors.toList());
         return new ResponseEntity<>(HttpStatus.OK);
@@ -149,9 +147,9 @@ public class RestUserController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/{id}/video")
     public ResponseEntity<?> saveVideo(@RequestBody VideoDto videoDto, @PathVariable Integer id){
-        User user = userService.get(id);
-        user.getVideos().add(videoDtoToVideo.convert(videoDto));
-        userService.save(user);
+        Dancer dancer = dancerService.get(id);
+        dancer.getVideos().add(videoDtoToVideo.convert(videoDto));
+        dancerService.save(dancer);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
