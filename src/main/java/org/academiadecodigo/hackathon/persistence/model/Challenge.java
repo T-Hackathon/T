@@ -1,17 +1,20 @@
 package org.academiadecodigo.hackathon.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "challenge")
-public class Challenge extends AbstractModel{
+public class Challenge extends AbstractModel {
     //Fields
     private String nameChallenge;
 
-    @OneToOne
+    @OneToOne(mappedBy = "challenge", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Location location;
 
+    @JsonManagedReference
     @OneToMany(
             // propagate changes on customer entity to account entities
             cascade = {CascadeType.ALL},

@@ -12,8 +12,6 @@ public class VideoToVideoDto {
         VideoDto videoDto = new VideoDto();
         videoDto.setId(video.getId());
         videoDto.setSrc(video.getSrc());
-        videoDto.setLocation(video.getLocation());
-        videoDto.setChallenge(video.getChallenge());
 
         return videoDto;
     }

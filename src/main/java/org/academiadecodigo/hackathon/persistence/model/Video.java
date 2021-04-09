@@ -1,5 +1,7 @@
 package org.academiadecodigo.hackathon.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +13,7 @@ public class Video extends AbstractModel{
     @ManyToOne
     private Dancer dancer;
 
-    @OneToOne
-    private Location location;
-
+    @JsonBackReference
     @ManyToOne
     private Challenge challenge;
 
@@ -26,21 +26,14 @@ public class Video extends AbstractModel{
         this.src = src;
     }
 
-    public Dancer getUser() {
+    public Dancer getDancer() {
         return dancer;
     }
 
-    public void setUser(Dancer dancer) {
+    public void setDancer(Dancer dancer) {
         this.dancer = dancer;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 
     public Challenge getChallenge() {
         return challenge;

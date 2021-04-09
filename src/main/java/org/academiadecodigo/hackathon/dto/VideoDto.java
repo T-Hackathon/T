@@ -11,7 +11,6 @@ public class VideoDto {
 
     private Location location;
 
-    private Challenge challenge;
 
     public Integer getId() {
         return id;
@@ -37,11 +36,4 @@ public class VideoDto {
         this.location = location;
     }
 
-    public Challenge getChallenge() {
-        return challenge;
-    }
-
-    public void setChallenge(Challenge challenge) {
-        this.challenge = challenge;
-    }
 }

@@ -137,12 +137,14 @@ public class RestUserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}/video")
-    public ResponseEntity<List<Video    >> videosFromUser(@PathVariable Integer id){
+    public ResponseEntity<List<VideoDto>> videosFromUser(@PathVariable Integer id){
         Dancer dancer = dancerService.get(id);
+
         List<VideoDto> toReturn = dancer.getVideos().stream()
                     .map(video -> videoToVideoDto.convert(video))
                     .collect(Collectors.toList());
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        return new ResponseEntity<>(toReturn, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/{id}/video")

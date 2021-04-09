@@ -19,7 +19,7 @@
 
         <property name="driverClass" value="${driver}"/>
         <property name="jdbcUrl" value="jdbc:${sql}://${prod.jdbc.host}/${prod.jdbc.database}?useSSL=false"/>
-        <property name="dancer" value="${prod.jdbc.username}"/>
+        <property name="user" value="${prod.jdbc.username}"/>
         <property name="password" value="${prod.jdbc.password}"/>
 
         <!-- c3p0 database connection pool management properties -->

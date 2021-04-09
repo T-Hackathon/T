@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "dancer")
 public class Dancer extends AbstractModel{
     //Fields
     private String userName;
@@ -26,7 +26,7 @@ public class Dancer extends AbstractModel{
 
             // use recipient foreign key on recipient table to establish
             // the many-to-one relationship instead of a join table
-            mappedBy = "users",
+            mappedBy = "dancer",
 
             // fetch accounts from database together with user
             fetch = FetchType.EAGER
@@ -86,7 +86,4 @@ public class Dancer extends AbstractModel{
         return videos;
     }
 
-    public void setVideos(List<Video> videos) {
-        this.videos = videos;
-    }
 }
