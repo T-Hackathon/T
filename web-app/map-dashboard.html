@@ -6,15 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dashboard | DanceGo</title>
         <link rel="shortcut icon" href="./media/icon.png" />
+
+        <!-- bootstrap -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
             crossorigin="anonymous"
         />
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <link rel="stylesheet" href="./src/dashboard.css" />
-        <link rel="stylesheet" href="./src/map.css" />
 
         <!-- fontawesome -->
         <link
@@ -23,18 +22,9 @@
             integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
             crossorigin="anonymous"
         />
-        <style type="text/css">
-            /* Always set the map height explicitly to define the size of the div
-           * element that contains the map. */
-            #map {
-                height: 70vh;
-                border-radius: 20px;
-                opacity: 90%;
-            }
 
-            /* Optional: Makes the sample page fill the window. */
-        </style>
-        <script src="./src/app.js"></script>
+        <link rel="stylesheet" href="./src/dashboard.css" />
+        <link rel="stylesheet" href="./src/map.css" />
     </head>
     <body>
         <div class="container">
@@ -43,6 +33,12 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <img src="./media/logo.png" alt="Logo" width="300px" />
+                    </div>
+                    <div class="col-sm-8 pt-2 text-end">
+                        <h5>
+                            Choose your challenge location on the map<br />&&
+                            Click on the corresponding button below!
+                        </h5>
                     </div>
                 </div>
             </header>
@@ -72,28 +68,19 @@
 
                 <div class="col-sm-8">
                     <div id="map"></div>
-
-                    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-                    <script
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAT2P0nfXEKm94RyDBQ4QiXJNUp4eo2PXg&callback=initMap&libraries=&v=weekly"
-                        async
-                    ></script>
-                    
                 </div>
             </div>
-            <div class="row teste">
+            <div class="row boxPick">
                 <div class="col-sm-4"></div>
-                <div class="col-sm-8 boxPick">
+                <div class="col-sm-8">
                     <div class="row">
                         <div
-                            class="col-sm d-flex flex-wrap justify-content-around mb-5"
+                            class="col-sm d-flex flex-wrap justify-content-around"
                         >
                             <button class="btns">1. Casa da Música</button>
                             <button class="btns">2. Torre Dos Clerigos</button>
                             <button class="btns">3. Estádio do Dragão</button>
-                            <a
-                                class="btns"
-                                href="dashboard.html"
+                            <a class="btns" href="dashboard.html"
                                 >4. Academia de Código</a
                             >
                             <button class="btns">5. Ribeira</button>
@@ -104,80 +91,25 @@
             </div>
         </div>
 
-        <!-- <div
-            class="modal fade"
-            id="accessModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <a href="./dashboard.html" class="start" id="ttt"
-                            >START CHALLENGES</a
-                        >
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         <footer
             class="d-flex align-items-center justify-content-around pt-3 pb-3 footer"
         >
             <div>Made with 🤍 by Javardancers</div>
         </footer>
 
-        <!-- <script>
-            let start = document.getElementById('ttt');
-            console.log(start);
-            start.addEventListener('click', function() {
-                
-                // Set the date we're counting down to
-                function countdownTimeStart() {
-                    var countDownDate = new Date("Sep 25, 2025 15:00:00").getTime();
+        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAT2P0nfXEKm94RyDBQ4QiXJNUp4eo2PXg&callback=initMap&libraries=&v=weekly"
+            async
+        ></script>
 
-                    // Update the count down every 1 second
-                    var x = setInterval(function () {
-                        // Get todays date and time
-                        var now = new Date().getTime();
-
-                        // Find the distance between now an the count down date
-                        var distance = countDownDate - now;
-
-                        // Time calculations for days, hours, minutes and seconds
-                        var hours = Math.floor(
-                            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                        );
-                        var minutes = Math.floor(
-                            (distance % (1000 * 60 * 60)) / (1000 * 60)
-                        );
-                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                        // Output the result in an element with id="demo"
-                        document.getElementById("countdown").innerHTML =
-                            hours + "h " + minutes + "m " + seconds + "s ";
-
-                        // If the count down is over, write some text
-                        if (distance < 0) {
-                            clearInterval(x);
-                            document.getElementById("countdown").innerHTML = "TIME'S UP";
-                        }
-                    }, 1000);
-                }
-                countdownTimeStart();
-
-                // let url = "http://192.168.1.238:8080/hackathon/api/user";
-
-                // axios.get(url).then(getInfo);
-            });
-
-        </script> -->
-
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
             crossorigin="anonymous"
         ></script>
+        <script src="./src/app.js"></script>
         <script src="./src/maps.js"></script>
     </body>
 </html>

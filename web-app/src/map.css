@@ -1,5 +1,11 @@
-.teste {
-    margin-bottom: 40px;
+#map {
+    height: 70vh;
+    border-radius: 20px;
+    opacity: 90%;
+}
+
+.boxPick {
+    margin-bottom: 80px;
 }
 
 .btns {
@@ -23,40 +29,4 @@
     cursor: pointer;
     color: #000;
     background-position: right;
-}
-
-.boxPick {
-    margin: 0 auto;
-}
-
-.modal .modal-content {
-    background-color: transparent;
-    border: none;
-}
-
-.modal-body {
-    margin: 0;
-    padding: 0;
-}
-
-.start {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    padding: 25px;
-    width: 200px;
-    font-size: 30px;
-    background: linear-gradient(to right, #dd84b6, #e4aecd);
-    background-size: 200%;
-    transition: 0.5 ease-in-out;
-    color: #000;
-    text-decoration: none;
-}
-
-.start:hover {
-    cursor: pointer;
-    background-position: right;
-    color: #000;
 }
