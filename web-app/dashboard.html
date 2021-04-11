@@ -109,6 +109,7 @@
                     </div>
                 </div>
             </header>
+            
             <div class="row card-user mb-5">
                 <div class="col-sm-4">
                     <div class="card text-center" style="width: 18rem">
@@ -157,8 +158,6 @@
                             <div class="col-sm">
                                 <iframe
                                     class="videos"
-                                    width="560"
-                                    height="315"
                                     src="https://www.youtube.com/embed/HlhXxquKcWo?controls=0&mute=1"
                                     title="YouTube video player"
                                     frameborder="0"
@@ -294,6 +293,8 @@
         >
             <div>Made with 🤍 by Javardancers</div>
         </footer>
+
+        <!-- scripts -->
         <script
             src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -306,46 +307,5 @@
         ></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="./src/app.js"></script>
-
-        <script type="text/javascript">
-            $(window).on("load", function () {
-                $("#accessModal").modal("show");
-            });
-        </script>
-
-        <script>
-            let start = document.getElementById("start");
-            start.onclick = function () {
-                function Timer(duration, display) {
-                    var timer = duration,
-                        hours,
-                        minutes,
-                        seconds;
-                    setInterval(function () {
-                        hours = parseInt((timer / 3600) % 24, 10);
-                        minutes = parseInt((timer / 60) % 60, 10);
-                        seconds = parseInt(timer % 60, 10);
-
-                        hours = hours < 10 ? "0" + hours : hours;
-                        minutes = minutes < 10 ? "0" + minutes : minutes;
-                        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                        display.text(
-                            hours + "h " + minutes + "m " + seconds + "s"
-                        );
-
-                        --timer;
-                    }, 1000);
-                }
-
-                jQuery(function ($) {
-                    var twentyFourHours = 24 * 60 * 60;
-                    var display = $("#countdown");
-                    Timer(twentyFourHours, display);
-                });
-
-                $("#accessModal").modal("hide");
-            };
-        </script>
     </body>
 </html>

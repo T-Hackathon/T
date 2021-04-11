@@ -15,7 +15,7 @@ function initMap() {
             { lat: 41.16214516368047, lng: -8.583642553508033 },
             "Estádio do Dragão",
         ],
-        
+
         [{ lat: 41.14047938906908, lng: -8.612548425238394 }, "Ribeira"],
         [{ lat: 41.153883156890835, lng: -8.610325444138175 }, "Perola Negra"],
         [
@@ -23,8 +23,6 @@ function initMap() {
             "Academia De Código",
         ],
     ];
-
-    const image = "";
 
     const infoWindow = new google.maps.InfoWindow();
 
@@ -71,53 +69,4 @@ function initMap() {
             infoWindow.open(marker.getMap(), marker);
         });
     });
-
-    // const map = new google.maps.Map(document.getElementById("map"), {
-    //     zoom: 14,
-    //     mapTypeId: 'satellite',
-    //     center: perolaNegra,
-    // });
-
-    // new google.maps.Marker({
-    //     position: casaDaMusica,
-    //     map,
-    //     title: "Casa da Música",
-    // });
-
-    // new google.maps.Marker({
-    //     position: torreDosClerigos,
-    //     map,
-    //     title: "Torre dos Clérigos",
-    // });
-
-    // new google.maps.Marker({
-    //     position: estadioDoDragao,
-    //     map,
-    //     title: "Estádio do Dragão",
-    // });
-
-    // new google.maps.Marker({
-    //     position: ponteDLuis,
-    //     map,
-    //     title: "Ponte D. Luís",
-    // });
-
-    // new google.maps.Marker({
-    //     position: ribeira,
-    //     map,
-    //     title: "Ribeira",
-    // });
-
-    // new google.maps.Marker({
-    //     position: perolaNegra,
-    //     map,
-    //     title: "Pérola Negra",
-    // });
-
-    // oi = new google.maps.Marker({
-    //     position: academiaDeCodigo,
-    //     map,
-    //     title: "<Academia de Código_>",
-    //     optimized: false,
-    // });
 }
