@@ -10,8 +10,10 @@ is.
 
 Have fun! At least, as much as we did making this winner project :D
 
-Credits:
-Hugo Duarte
-João Lucianno
-Vania Costa
-Vasco Ferraz
+
+
+Credits:  
+Hugo Duarte  
+João Lucianno  
+Vania Costa  
+Vasco Ferraz  
