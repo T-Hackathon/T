@@ -21,10 +21,7 @@ Vania Costa
 Vasco Ferraz     
 
 
-
-
-Documentation:  
-
+### **Documentation:**
 ```https://dancego.herokuapp.com/api/user -> GET list of users  
 
 https://dancego.herokuapp.com/api/user/{id} -> GET user  
