@@ -18,14 +18,14 @@ Credits:
 Hugo Duarte  
 João Lucianno  
 Vania Costa  
-Vasco Ferraz 
+Vasco Ferraz     
 
 
 
 
 Documentation:  
 
-https://dancego.herokuapp.com/api/user -> GET list of users  
+```https://dancego.herokuapp.com/api/user -> GET list of users  
 
 https://dancego.herokuapp.com/api/user/{id} -> GET user  
 
@@ -36,4 +36,4 @@ https://dancego.herokuapp.com/api/user/{id} -> PUT edit user
 https://dancego.herokuapp.com/api/user/{id}/video -> GET videos from user  
 
 https://dancego.herokuapp.com/api/user/{id}/video -> POST upload video from user  
-
+```
