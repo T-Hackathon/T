@@ -33,4 +33,11 @@ public class DancerServiceImpl implements DancerService {
     public Dancer save(Dancer dancer) {
         return dancerDao.saveOrUpdate(dancer);
     }
+
+    @Transactional
+    @Override
+    public void delete(Integer id) {
+        dancerDao.delete(id);
+    }
+
 }

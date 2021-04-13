@@ -136,6 +136,7 @@ public class RestUserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
     @RequestMapping(method = RequestMethod.GET, path = "/{id}/video")
     public ResponseEntity<List<VideoDto>> videosFromUser(@PathVariable Integer id){
         Dancer dancer = dancerService.get(id);
@@ -147,6 +148,7 @@ public class RestUserController {
         return new ResponseEntity<>(toReturn, HttpStatus.OK);
     }
 
+
     @RequestMapping(method = RequestMethod.POST, path = "/{id}/video")
     public ResponseEntity<?> saveVideo(@RequestBody VideoDto videoDto, @PathVariable Integer id){
         Dancer dancer = dancerService.get(id);
@@ -157,20 +159,12 @@ public class RestUserController {
     }
 
 
-//    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-//    public ResponseEntity<UserDto> deleteUser(@PathVariable Integer id) {
-//
-//        try {
-//
-//            UserService.delete(id);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//
-//        } catch (AssociationExistsException e) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//
-//        } catch (UserNotFoundException e) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    public ResponseEntity<DancerDto> deleteUser(@PathVariable Integer id) {
+
+        dancerService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
 

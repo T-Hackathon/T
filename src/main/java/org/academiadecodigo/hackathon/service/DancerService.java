@@ -11,4 +11,6 @@ public interface DancerService {
     List<Dancer>  list();
 
     Dancer save(Dancer dancer);
+
+    void delete(Integer id);
 }
