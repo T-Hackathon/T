@@ -22,12 +22,12 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/user")
-public class RestUserController {
+@RequestMapping("/api/dancer")
+public class RestDancerController {
 
     private DancerService dancerService;
-    private DancerDtoToUser dancerDtoToUser;
-    private DancerToUserDto dancerToUserDto;
+    private DancerDtoToUser dancerDtoToDancer;
+    private DancerToUserDto dancerToDancerDto;
     private ChallengeDtoToChallenge challengeDtoToChallenge;
     private ChallengeToChallengeDto challengeToChallengeDto;
     private VideoDtoToVideo videoDtoToVideo;
@@ -54,28 +54,28 @@ public class RestUserController {
     }
 
     @Autowired
-    public void setUserService(DancerService dancerService) {
+    public void setDancerService(DancerService dancerService) {
         this.dancerService = dancerService;
     }
 
 
     @Autowired
-    public void setUserDtoToUser(DancerDtoToUser dancerDtoToUser) {
-        this.dancerDtoToUser = dancerDtoToUser;
+    public void setDancerDtoToDancer(DancerDtoToUser dancerDtoToDancer) {
+        this.dancerDtoToDancer = dancerDtoToDancer;
     }
 
 
     @Autowired
-    public void setUserToUserDto(DancerToUserDto dancerToUserDto) {
-        this.dancerToUserDto = dancerToUserDto;
+    public void setDancerToDancerDto(DancerToUserDto dancerToDancerDto) {
+        this.dancerToDancerDto = dancerToDancerDto;
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = {"/", ""})
-    public ResponseEntity<List<DancerDto>> listUsers() {
+    public ResponseEntity<List<DancerDto>> listDancers() {
 
         List<DancerDto> dancerDtos = dancerService.list().stream()
-                .map(user -> dancerToUserDto.convert(user))
+                .map(dancer -> dancerToDancerDto.convert(dancer))
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(dancerDtos, HttpStatus.OK);
@@ -83,7 +83,7 @@ public class RestUserController {
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ResponseEntity<DancerDto> showUser(@PathVariable Integer id) {
+    public ResponseEntity<DancerDto> showDancer(@PathVariable Integer id) {
 
         Dancer Dancer = dancerService.get(id);
 
@@ -91,21 +91,21 @@ public class RestUserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(dancerToUserDto.convert(Dancer), HttpStatus.OK);
+        return new ResponseEntity<>(dancerToDancerDto.convert(Dancer), HttpStatus.OK);
     }
 
 
     @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
-    public ResponseEntity<?> addUser(@Valid @RequestBody DancerDto dancerDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> addDancer(@Valid @RequestBody DancerDto dancerDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
         if (bindingResult.hasErrors() || dancerDto.getId() != null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        Dancer savedDancer = dancerService.save(dancerDtoToUser.convert(dancerDto));
+        Dancer savedDancer = dancerService.save(dancerDtoToDancer.convert(dancerDto));
 
         // get help from the framework building the path for the newly created resource
-        UriComponents uriComponents = uriComponentsBuilder.path("/api/user/" + savedDancer.getId()).build();
+        UriComponents uriComponents = uriComponentsBuilder.path("/api/dancer/" + savedDancer.getId()).build();
 
         // set headers with the created path
         HttpHeaders headers = new HttpHeaders();
@@ -116,7 +116,7 @@ public class RestUserController {
 
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public ResponseEntity<DancerDto> editUser(@Valid @RequestBody DancerDto DancerDto, BindingResult bindingResult, @PathVariable Integer id) {
+    public ResponseEntity<DancerDto> editDancer(@Valid @RequestBody DancerDto DancerDto, BindingResult bindingResult, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -132,13 +132,13 @@ public class RestUserController {
 
         DancerDto.setId(id);
 
-        dancerService.save(dancerDtoToUser.convert(DancerDto));
+        dancerService.save(dancerDtoToDancer.convert(DancerDto));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}/video")
-    public ResponseEntity<List<VideoDto>> videosFromUser(@PathVariable Integer id){
+    public ResponseEntity<List<VideoDto>> videosFromDancer(@PathVariable Integer id){
         Dancer dancer = dancerService.get(id);
 
         List<VideoDto> toReturn = dancer.getVideos().stream()
@@ -160,7 +160,7 @@ public class RestUserController {
 
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    public ResponseEntity<DancerDto> deleteUser(@PathVariable Integer id) {
+    public ResponseEntity<DancerDto> deleteDancer(@PathVariable Integer id) {
 
         dancerService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
