@@ -7,12 +7,12 @@ import org.academiadecodigo.hackathon.service.DancerService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DancerDtoToUser {
+public class DancerDtoToDancer {
 
     private DancerService dancerService;
 
     @Autowired
-    public void setUserService(DancerService dancerService) {
+    public void setDancerService(DancerService dancerService) {
         this.dancerService = dancerService;
     }
 
@@ -30,4 +30,3 @@ public class DancerDtoToUser {
         return dancer;
     }
 }
-

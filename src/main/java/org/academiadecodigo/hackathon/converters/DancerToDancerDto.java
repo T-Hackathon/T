@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DancerToUserDto {
+public class DancerToDancerDto {
 
 
     public DancerDto convert(Dancer Dancer) {

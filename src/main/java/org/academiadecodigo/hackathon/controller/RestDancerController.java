@@ -4,7 +4,6 @@ import org.academiadecodigo.hackathon.converters.*;
 import org.academiadecodigo.hackathon.dto.DancerDto;
 import org.academiadecodigo.hackathon.dto.VideoDto;
 import org.academiadecodigo.hackathon.persistence.model.Dancer;
-import org.academiadecodigo.hackathon.persistence.model.Video;
 import org.academiadecodigo.hackathon.service.DancerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -26,8 +25,8 @@ import java.util.stream.Collectors;
 public class RestDancerController {
 
     private DancerService dancerService;
-    private DancerDtoToUser dancerDtoToDancer;
-    private DancerToUserDto dancerToDancerDto;
+    private DancerDtoToDancer dancerDtoToDancer;
+    private DancerToDancerDto dancerToDancerDto;
     private ChallengeDtoToChallenge challengeDtoToChallenge;
     private ChallengeToChallengeDto challengeToChallengeDto;
     private VideoDtoToVideo videoDtoToVideo;
@@ -38,20 +37,24 @@ public class RestDancerController {
         this.challengeDtoToChallenge = challengeDtoToChallenge;
     }
 
+
     @Autowired
     public void setChallengeToChallengeDto(ChallengeToChallengeDto challengeToChallengeDto) {
         this.challengeToChallengeDto = challengeToChallengeDto;
     }
+
 
     @Autowired
     public void setVideoDtoToVideo(VideoDtoToVideo videoDtoToVideo) {
         this.videoDtoToVideo = videoDtoToVideo;
     }
 
+
     @Autowired
     public void setVideoToVideoDto(VideoToVideoDto videoToVideoDto) {
         this.videoToVideoDto = videoToVideoDto;
     }
+
 
     @Autowired
     public void setDancerService(DancerService dancerService) {
@@ -60,13 +63,13 @@ public class RestDancerController {
 
 
     @Autowired
-    public void setDancerDtoToDancer(DancerDtoToUser dancerDtoToDancer) {
+    public void setDancerDtoToDancer(DancerDtoToDancer dancerDtoToDancer) {
         this.dancerDtoToDancer = dancerDtoToDancer;
     }
 
 
     @Autowired
-    public void setDancerToDancerDto(DancerToUserDto dancerToDancerDto) {
+    public void setDancerToDancerDto(DancerToDancerDto dancerToDancerDto) {
         this.dancerToDancerDto = dancerToDancerDto;
     }
 

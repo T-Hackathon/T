@@ -12,7 +12,7 @@ public class VideoDtoToVideo {
     private VideoService videoService;
 
     @Autowired
-    public void setUserService(VideoService videoService) {
+    public void setDancerService(VideoService videoService) {
         this.videoService = videoService;
     }
 
