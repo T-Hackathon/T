@@ -165,6 +165,16 @@ public class RestDancerController {
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public ResponseEntity<DancerDto> deleteDancer(@PathVariable Integer id) {
 
+        Dancer dancer = dancerService.get(id);
+
+        if (dancerService.get(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        if (!dancer.getVideos().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
         dancerService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
