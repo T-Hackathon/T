@@ -34,7 +34,6 @@ public class Video extends AbstractModel{
         this.dancer = dancer;
     }
 
-
     public Challenge getChallenge() {
         return challenge;
     }

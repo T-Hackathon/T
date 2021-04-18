@@ -5,6 +5,7 @@ import org.academiadecodigo.hackathon.dto.DancerDto;
 import org.academiadecodigo.hackathon.dto.VideoDto;
 import org.academiadecodigo.hackathon.persistence.model.Dancer;
 import org.academiadecodigo.hackathon.service.DancerService;
+import org.academiadecodigo.hackathon.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 public class RestDancerController {
 
     private DancerService dancerService;
+    private VideoService videoService;
     private DancerDtoToDancer dancerDtoToDancer;
     private DancerToDancerDto dancerToDancerDto;
     private ChallengeDtoToChallenge challengeDtoToChallenge;
@@ -61,6 +63,11 @@ public class RestDancerController {
         this.dancerService = dancerService;
     }
 
+    @Autowired
+    public void setVideoService(VideoService videoService) {
+        this.videoService = videoService;
+    }
+
 
     @Autowired
     public void setDancerDtoToDancer(DancerDtoToDancer dancerDtoToDancer) {
@@ -75,7 +82,7 @@ public class RestDancerController {
 
 
     @RequestMapping(method = RequestMethod.GET, path = {"/", ""})
-    public ResponseEntity<List<DancerDto>> listDancers() {
+    public ResponseEntity<List<DancerDto>> listAllDancers() {
 
         List<DancerDto> dancerDtos = dancerService.list().stream()
                 .map(dancer -> dancerToDancerDto.convert(dancer))
@@ -86,7 +93,7 @@ public class RestDancerController {
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ResponseEntity<DancerDto> showDancer(@PathVariable Integer id) {
+    public ResponseEntity<DancerDto> listDancer(@PathVariable Integer id) {
 
         Dancer Dancer = dancerService.get(id);
 
@@ -140,28 +147,6 @@ public class RestDancerController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}/video")
-    public ResponseEntity<List<VideoDto>> videosFromDancer(@PathVariable Integer id){
-        Dancer dancer = dancerService.get(id);
-
-        List<VideoDto> toReturn = dancer.getVideos().stream()
-                    .map(video -> videoToVideoDto.convert(video))
-                    .collect(Collectors.toList());
-
-        return new ResponseEntity<>(toReturn, HttpStatus.OK);
-    }
-
-
-    @RequestMapping(method = RequestMethod.POST, path = "/{id}/video")
-    public ResponseEntity<?> saveVideo(@RequestBody VideoDto videoDto, @PathVariable Integer id){
-        Dancer dancer = dancerService.get(id);
-        dancer.getVideos().add(videoDtoToVideo.convert(videoDto));
-        dancerService.save(dancer);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public ResponseEntity<DancerDto> deleteDancer(@PathVariable Integer id) {
 
@@ -179,5 +164,40 @@ public class RestDancerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-}
 
+    @RequestMapping(method = RequestMethod.GET, path = "/video")
+    public ResponseEntity<List<VideoDto>> listAllVideos(){
+
+        List<VideoDto> videosDtos = videoService.list().stream()
+                .map(video -> videoToVideoDto.convert(video))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(videosDtos, HttpStatus.OK);
+
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}/video")
+    public ResponseEntity<List<VideoDto>> listVideosFromDancer(@PathVariable Integer id){
+        Dancer dancer = dancerService.get(id);
+
+        List<VideoDto> videosDtos = dancer.getVideos().stream()
+                    .map(video -> videoToVideoDto.convert(video))
+                    .collect(Collectors.toList());
+
+        return new ResponseEntity<>(videosDtos, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, path = "/{id}/video")
+    public ResponseEntity<?> saveVideo(@RequestBody VideoDto videoDto, @PathVariable Integer id){
+        Dancer dancer = dancerService.get(id);
+        dancer.getVideos().add(videoDtoToVideo.convert(videoDto));
+        dancerService.save(dancer);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+
+}
